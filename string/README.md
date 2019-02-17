@@ -22,7 +22,7 @@ From the begining of S, begin to compare each character in S and P:
 When the algorithm proceed to current location, S[7] was found mismatching P[5].
 
 |Index|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|
-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |S|b|c|a|b|c|a|b|c|a|b|d|a|a|a|d|d|
 |P|||a|b|c|a|b|d|
 |||||||||^|
@@ -30,7 +30,7 @@ When the algorithm proceed to current location, S[7] was found mismatching P[5].
 Then the algorithm continue to compare P against S at index 3, like:
 
 |Index|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|
-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |S|b|c|a|b|c|a|b|c|a|b|d|a|a|a|d|d|
 |P||||a|b|c|a|b|d|
 |||||^|
@@ -45,7 +45,7 @@ O(n^2^)
 Come back to following position:
 
 |Index|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|
-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |S|b|c|a|b|c|a|b|c|a|b|d|a|a|a|d|d|
 |P|||a|b|c|a|b|d|
 |||||||||^|
@@ -61,7 +61,7 @@ In the begining of the algorithm, KMP algorithm handle the pattern string P to b
 In the case above, the roll-back steps at P[5] ("d") should be 2. In next step, the algorithm should move back 2 characters, in S rather than P, to S[5] to continue the compare.
 
 |Index|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|
-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |S|b|c|a|b|c|a|b|c|a|b|d|a|a|a|d|d|
 |P||||||a|b|c|a|b|d|
 |||||||^|
@@ -79,7 +79,7 @@ The algorithm is described in human language as:
 In our case, **T** of the pattern **T** would looks like:
 
 |Index|0|1|2|3|4|5|
-|-|-|
+|-|-|-|-|-|-|-|
 |P|a|b|c|a|b|d|
 |T|-1|0|0|0|1|2|
 ||||^||^|
@@ -90,7 +90,7 @@ Let me explain how the scanning works by examples:
 
 Is the algorithm mentioned above good? Yes. But is it good enough? No. It can be further optimized.
 
-Let's look into case 2 of the example above. When you are at P[4] ("b") and found a mismatch, you are in a repeating leading sub-string ("ab" in P[3~4] repeats "ab" in P[0~1]). If current chararacter in S doesn't match "b", if won't match even if you roll back 1 step and restart the comparasion there, because the examing must fail again at the same "b" in S.
+Let's look into case 2 of the example above. When you are at P[4] ("b") and found a mismatch, you are in a repeating leading sub-string ("ab" in P[3,4] repeats "ab" in P[0,1]). If current chararacter in S doesn't match "b", if won't match even if you roll back 1 step and restart the comparasion there, because the examing must fail again at the same "b" in S.
 
 So the 2nd rule can be further optimized as:
 - For a location in P that's repeating the leading part, the corresponding location in **T** should be "0", too. When the repeating end, the T value for the comming non-repeating character should be "how far current repeating sub-string has matched".
@@ -98,7 +98,7 @@ So the 2nd rule can be further optimized as:
 The **T** values should be:
 
 |Index|0|1|2|3|4|5|
-|-|-|
+|-|-|-|-|-|-|-|
 |P|a|b|c|a|b|d|
 |T|-1|0|0|-1|0|2|
 
