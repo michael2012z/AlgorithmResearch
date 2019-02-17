@@ -1,3 +1,5 @@
+import time
+
 ''' Brute-force method as comparasion base. '''
 
 def naiveSearch (s, p):
@@ -71,8 +73,7 @@ def kmpSearch(s, p):
 def testNaiveSearch(s, p):
     print(naiveSearch(s, p))    
 
-def testMakeTable():
-    p = "abcabdabcaaa"
+def testMakeTable(p):
     table = makeTableB(p)
     print(p)
     print(table)
@@ -80,10 +81,41 @@ def testMakeTable():
 def testKmpSearch(s, p):
     print(kmpSearch(s, p))    
 
+
+def testSamples():
+    testSample("sample0.txt", "would")
+    testSample("sample1.txt", "aaaaaaaaaa")
+    testSample("sample1.txt", "aaaaaaaaac")
+
+def testSample(fn, p):
+    f = open(fn, "r")
+    s = f.read()
+    f.close()
+
+    start = time.time()
+    for i in range(10):
+        l = naiveSearch(s, p)
+    end = time.time()
+    print("Time used by brute force: " + str((end-start)/10))
+    
+    start = time.time()
+    for i in range(10):
+        l = kmpSearch(s, p)
+    end = time.time()
+    print("Time used by KMP: " + str((end-start)/10))
+
+    
 if __name__ == "__main__":
     ruler = '0         1         2         3         4         5         6         7         8         '
     ruler = '012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789'
     s     = 'abcffsbcxfsabcabcabdabcabdaaaaabcabckfdliurewovnmxvbnabcabdabcabdndjklsabcabdabdabdfj'
     p     = 'abcabd'
+    print('++++++++++ test NaiveSearch ++++++++++')
     testNaiveSearch(s, p)
+    print('++++++++++ test MakeTable ++++++++++')
+    testMakeTable(p)
+    print('++++++++++ test KmpSearch ++++++++++')
     testKmpSearch(s, p)
+    print('++++++++++ test Samples ++++++++++')
+    testSamples()
+    
