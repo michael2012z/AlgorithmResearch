@@ -113,3 +113,16 @@ Shown above.
 #### Efficiency
 O(n)
 
+#### Best and Worst Case
+
+KMP algorithm works best when the begining part of the pattern string repeats in both pattern string T and target string S. Because KMP algorithm JUMPS a lot in such situation but brute-force algorithm doesn't. An extreme case is:
+- S = "aaaaaaaaabaaaaaaaaabaaaaaaaaaa"
+- P = "aaaaaaaaaa"
+
+In this example, KMP does no extra comparasion at all, but brute-force does a lot.
+
+The worst case for KMP appears when the begining part of pattern string doesn't repeat. Then KMP does nothing better than brute-force algorithm. An example is:
+- S = "abcdefgabcdefgabcdefgabcdefgabcdefg"
+- P = "abcdefg"
+
+Good news is that, for the example above, even brute-force compares 2n times only, not too bad.
