@@ -56,8 +56,7 @@ class BinaryTree:
         if self.rightChild != None:
             self.rightChild.inOrder(func)
         func(self.value)
-    
-
+            
 if __name__ == '__main__':
     t = BinaryTree(0)
     t.insertLeft(1)
@@ -71,4 +70,3 @@ if __name__ == '__main__':
     t.preOrder(print)
     print ("----- postOrder -----")
     t.postOrder(print)
-    
