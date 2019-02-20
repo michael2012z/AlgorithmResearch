@@ -37,12 +37,24 @@ class BinaryTree:
         return 1 + max(maxLeft, maxRight)
 
     def inOrder(self, func):
+        if self.leftChild != None:
+            self.leftChild.inOrder(func)
         func(self.value)
+        if self.rightChild != None:
+            self.rightChild.inOrder(func)
     
     def preOrder(self, func):
         func(self.value)
+        if self.leftChild != None:
+            self.leftChild.inOrder(func)
+        if self.rightChild != None:
+            self.rightChild.inOrder(func)
     
     def postOrder(self, func):
+        if self.leftChild != None:
+            self.leftChild.inOrder(func)
+        if self.rightChild != None:
+            self.rightChild.inOrder(func)
         func(self.value)
     
 
@@ -51,6 +63,12 @@ if __name__ == '__main__':
     t.insertLeft(1)
     t.insertLeft(2)
     t.insertRight(3)
+    print ("----- height -----")
     print (t.height())
+    print ("----- inOrder -----")
     t.inOrder(print)
+    print ("----- preOrder -----")
+    t.preOrder(print)
+    print ("----- postOrder -----")
+    t.postOrder(print)
     
