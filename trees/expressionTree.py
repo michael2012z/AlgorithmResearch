@@ -25,7 +25,17 @@ def postfixToTree(postfix):
 
 if __name__ == "__main__":
     print ("----- buildExpressionTree -----")
+
     infix = '( A + B ) * C - ( D - E ) * ( F + G )'
+    print ("infix expression:")
+    print (infix)
+
     postfix = infixToPostfix(infix)
+    print ("postfix expression:")
+    print (''.join(postfix))
+
     et = postfixToTree(postfix)
-    et.inOrder(print)
+    e = []
+    et.inOrder(e.append)
+    print ("expression tree:")
+    print(''.join(e))
