@@ -13,3 +13,14 @@ class Stack:
 
     def size(self):
         return len(self.items)
+
+if __name__ == '__main__':
+    s = Stack()
+    s.push('a')
+    s.push('b')
+    s.push(1)
+    s.push(2)
+    while s.size() > 0:
+        print(s.pop())
+
+        
