@@ -12,6 +12,8 @@ four steps:
 
 ## Cases
 ### Rod cutting
+#### Problem description
+Given a rod of length n inches and a table of prices p~i~ for i = 1, 2, ..., n, determine the maximum revenue r~n~ obtainable by cutting up the rod and selling the pieces. Note that if the price p~n~ for a rod of length n is large enough, an optimal solution may require no cutting at all.
 
 ### Matrix-chain multiplication
 
