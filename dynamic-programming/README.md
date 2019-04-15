@@ -43,4 +43,10 @@ The solution is possible in top-down implementation as well.
 #### Problem description
 Given a chain <A<sub>1</sub>, A<sub>2</sub>, ..., A<sub>n</sub>> of n matrices, where for i D 1, 2, ..., n, matrix A<sub>i</sub> has dimension p<sub>i-1</sub> x p<sub>i</sub>, fully parenthesize the product A<sub>1</sub>A<sub>2</sub>...A<sub>n</sub> in a way that minimizes the number of scalar multiplications.
 
+#### Optimal substructure
+Let m<sub>i,j</sub> be the minimum number of scalar multiplications needed to compute the matrix Am<sub>i..j</sub> ; for the full problem, the lowestcost way to compute A<sub>1..n</sub> would thus be m<sub>1..n</sub>.
+m<sub>i,j</sub> = 
+- min( m<sub>i,j</sub> 
+
+
 ### Longest common subsequence
