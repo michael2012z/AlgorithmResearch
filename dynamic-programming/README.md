@@ -40,4 +40,7 @@ The solution is possible in top-down implementation as well.
 
 ### Matrix-chain multiplication
 
+#### Problem description
+Given a chain <A<sub>1</sub>, A<sub>2</sub>, ..., A<sub>n</sub>> of n matrices, where for i D 1, 2, ..., n, matrix A<sub>i</sub> has dimension p<sub>i-1</sub> x p<sub>i</sub>, fully parenthesize the product A<sub>1</sub>A<sub>2</sub>...A<sub>n</sub> in a way that minimizes the number of scalar multiplications.
+
 ### Longest common subsequence
