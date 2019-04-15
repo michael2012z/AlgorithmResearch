@@ -11,9 +11,32 @@ four steps:
 4. Construct an optimal solution from computed information.
 
 ## Cases
+
 ### Rod cutting
+
 #### Problem description
 Given a rod of length n inches and a table of prices p<sub>i</sub> for i = 1, 2, ..., n, determine the maximum revenue r<sub>n</sub> obtainable by cutting up the rod and selling the pieces. Note that if the price p<sub>n</sub> for a rod of length n is large enough, an optimal solution may require no cutting at all.
+
+#### Optimal substructure
+The problem can be broken down into sub-problems:
+r<sub>n</sub> = max (r<sub>1</sub> + r<sub>n-1</sub>, r<sub>2</sub> + r<sub>n-2</sub>, ..., r<sub>n-1</sub> + r<sub>1</sub>, p<sub>n</sub>)
+
+#### Implementation
+##### Recursive top-down implementation
+https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/rod-cutting.py#L2
+
+##### Memoized top-down implementation
+The raw recursive top-down implementation can be optimized by recording the result of sub-problems during the recursion.
+https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/rod-cutting.py#L16
+
+##### Bottom-up implementation
+Bottom-up implementation starts from the most elementary sub-problems and build result of higher level problem from existing results.
+https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/rod-cutting.py#L37
+
+##### Solution
+A solution was made in bottom-up implementation.
+https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/rod-cutting.py#L52
+The solution is possible in top-down implementation as well.
 
 ### Matrix-chain multiplication
 
