@@ -66,11 +66,24 @@ l(i, j) =
 The raw recursive solution of the optimal substructure. See https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/longest-common-subsequence.py#L2
 
 ##### Bottom-up implementation
-
-|i\j (0\0)|0|1 (B)|2 (D)|3 (C)|4 (A)|5 (B)|6 (A)|
+The non-recursive bottom-up algorithm implement a table to calculate LCS.
+|x<sub>i</sub>\y<sub>j</sub>|0|1 (B)|2 (D)|3 (C)|4 (A)|5 (B)|6 (A)|
 |-|-|-|-|-|-|-|-|
 |0 |0|0|0|0|0|0|0|
 |1 (A)|0|0|0|0|1|1|1|
+|2 (B)|0|1|1|1|1|2|2|
+|3 (C)|0|1|1|2|2|2|2|
+|4 (B)|0|1|1|2|2|3|3|
+|5 (D)|0|1|2|2|2|3|2|
+|6 (A)|0|1|2|2|3|3|4|
+|7 (B)|0|1|2|2|3|4|4|
+See https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/longest-common-subsequence.py#L10 for source code.
+
+The table above was used to calculate the length only. To get the solution, you need another table:
+|x<sub>i</sub>\y<sub>j</sub>|0|1 (B)|2 (D)|3 (C)|4 (A)|5 (B)|6 (A)|
+|-|-|-|-|-|-|-|-|
+|0 |0|0|0|0|0|0|0|
+|1 (A)|0|\||\||\||\\|-|\\|
 |2 (B)|0|1|1|1|1|2|2|
 |3 (C)|0|1|1|2|2|2|2|
 |4 (B)|0|1|1|2|2|3|3|
