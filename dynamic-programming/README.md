@@ -54,8 +54,25 @@ m<sub>i,j</sub> =
 The meaning of longest common subsequence is straight forward. Let's see an example. Let X = "ABCBDAB" and Y = "BDCABA", the longest common subsequence (LCS) is "BCBA", the length is 4.
 
 #### Optimal substructure
-Let i the index of string X, j the index of string Y, l(i, j) the length of longest common subsequence of \[x<sub>0</sub>, x<sub>1</sub>, ..., x<sub>i</sub>\]
+Let i the index of string X, j the index of string Y, l(i, j) the length of longest common subsequence of \[x<sub>0</sub>, x<sub>1</sub>, ..., x<sub>i</sub>\] and \[y<sub>0</sub>, y<sub>1</sub>, ..., y<sub>j</sub>\]. We have recursive optimal solution:
 
-Let l(i, j) be the length of LCS
+l(i, j) = 
+- 0, if i=0 or j=0;
+- l(i-1, j-1), if i, j > 0 and x<sub>i</sub>=y<sub>j</sub>;
+- max(l(i-1, j), l(i, j-1)), if i, j > 0 and x<sub>i</sub>!=y<sub>j</sub>;
 
+#### Implementation
+##### Recursive top-down implementation
+The raw recursive solution of the optimal substructure. See https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/longest-common-subsequence.py#L2
 
+##### Bottom-up implementation
+
+|i\j (0\0)||1|2|3|4|5|6|
+|-|-|-|-|-|-|-|-|
+|1|0|0|0|0|0|0|0|
+|2|0|0|0|0|1|1|1|
+|3|0|1|1|1|1|2|2|
+|4|0|1|1|2|2|2|2|
+|5|0|1|1|2|2|3|3|
+|6|0|1|2|2|3|3|4|
+|7|0|1|2|2|3|4|4|
