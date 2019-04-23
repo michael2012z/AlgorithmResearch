@@ -50,3 +50,12 @@ m<sub>i,j</sub> =
 
 
 ### Longest common subsequence
+#### Problem description
+The meaning of longest common subsequence is straight forward. Let's see an example. Let X = "ABCBDAB" and Y = "BDCABA", the longest common subsequence (LCS) is "BCBA", the length is 4.
+
+#### Optimal substructure
+Let i the index of string X, j the index of string Y, l(i, j) the length of longest common subsequence of \[x<sub>0</sub>, x<sub>1</sub>, ..., x<sub>i</sub>\]
+
+Let l(i, j) be the length of LCS
+
+
