@@ -87,10 +87,11 @@ The table above was used to calculate the length only. To get the solution, you 
 |-|-|-|-|-|-|-|-|
 |0 |0|0|0|0|0|0|0|
 |1 (A)|0|up|up|up|up-left|left|up-left|
-|2 (B)|0|up-left|left|left|up|up-left|2|
+|2 (B)|0|up-left|left|left|up|up-left|left|
 |3 (C)|0|up|up|up-left|left|up|up|
 |4 (B)|0|left|up|up|up|up-left|left|
 |5 (D)|0|up|up-left|up|up|up|up|
 |6 (A)|0|up|up|up|up-left|up|up-left|
 |7 (B)|0|up-left|up|up|up|up-left|up|
 
+The two table are made together, but you need a small piece of code to print the solution: https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/longest-common-subsequence.py#L24.
