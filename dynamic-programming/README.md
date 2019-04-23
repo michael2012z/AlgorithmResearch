@@ -75,20 +75,22 @@ The non-recursive bottom-up algorithm implement a table to calculate LCS.
 |2 (B)|0|1|1|1|1|2|2|
 |3 (C)|0|1|1|2|2|2|2|
 |4 (B)|0|1|1|2|2|3|3|
-|5 (D)|0|1|2|2|2|3|2|
+|5 (D)|0|1|2|2|2|3|3|
 |6 (A)|0|1|2|2|3|3|4|
 |7 (B)|0|1|2|2|3|4|4|
 
 See https://github.com/michael2012z/algorithms/blob/master/dynamic-programming/longest-common-subsequence.py#L10 for source code.
 
 The table above was used to calculate the length only. To get the solution, you need another table:
+
 |x<sub>i</sub>\y<sub>j</sub>|0|1 (B)|2 (D)|3 (C)|4 (A)|5 (B)|6 (A)|
 |-|-|-|-|-|-|-|-|
 |0 |0|0|0|0|0|0|0|
-|1 (A)|0|\||\||\||\\|-|\\|
-|2 (B)|0|1|1|1|1|2|2|
-|3 (C)|0|1|1|2|2|2|2|
-|4 (B)|0|1|1|2|2|3|3|
-|5 (D)|0|1|2|2|2|3|2|
-|6 (A)|0|1|2|2|3|3|4|
-|7 (B)|0|1|2|2|3|4|4|
+|1 (A)|0|up|up|up|up-left|left|up-left|
+|2 (B)|0|up-left|left|left|up|up-left|2|
+|3 (C)|0|up|up|up-left|left|up|up|
+|4 (B)|0|left|up|up|up|up-left|left|
+|5 (D)|0|up|up-left|up|up|up|up|
+|6 (A)|0|up|up|up|up-left|up|up-left|
+|7 (B)|0|up-left|up|up|up|up-left|up|
+
