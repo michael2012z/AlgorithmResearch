@@ -1,10 +1,14 @@
+from algorithms.basic.queue import Queue
+
 class Vertex:
     
     def __init__(self, key):
         self.id = key
         self.connectedTo = {}
+        self.distance = 0
+        self.color = ''
 
-    def addNeighbor(self, nbr, weight=0):
+    def addNeighbor(self, nbr, weight=1):
         self.connectedTo[nbr] = weight
 
     def __str__(self):
@@ -18,6 +22,19 @@ class Vertex:
 
     def getWeight(self, nbr):
         return self.connectedTo[nbr]
+
+    def setDistance(self, d):
+        self.distance = d
+
+    def getDistance(self):
+        return self.distance
+
+    def setColor(self, c):
+        self.color = c
+
+    def getColor(self):
+        return self.color
+
 
 class Graph:
 
@@ -54,7 +71,21 @@ class Graph:
     def __iter__(self):
         return iter(self.vertList.values())
 
-if __name__ == '__main__':
+    def bfs(self, start):
+        start.setDistance(0)
+        vertQueue = Queue()
+        vertQueue.enqueue(start)
+        while (vertQueue.size() > 0):
+            currentVert = vertQueue.dequeue()
+            for nbr in currentVert.getConnections():
+                if (nbr.getColor() == 'white'):
+                    nbr.setColor('gray')
+                    nbr.setDistance(currentVert.getDistance() + currentVert.getWeight(nbr))
+                    vertQueue.enqueue(nbr)
+            currentVert.setColor('black')
+            print(currentVert.getId())
+
+def test1():
     g = Graph()
     for i in range(6):
         g.addVertex(i)
@@ -70,3 +101,30 @@ if __name__ == '__main__':
     for v in g:
         for w in v.getConnections():
             print("( %s , %s , %d)" % (v.getId(), w.getId(), v.getWeight(w)))
+
+def test2():
+    g = Graph()
+    g.addVertex("fool")
+    g.addVertex("pool")
+    g.addVertex("foil")
+    g.addVertex("foul")
+    g.addVertex("cool")
+    g.addVertex("poll")
+    g.addVertex("fail")
+    g.addVertex("pole")
+    g.addVertex("pall")
+    g.addVertex("pope")
+    g.addEdge("fool", "pool")
+    g.addEdge("fool", "foil")
+    g.addEdge("fool", "foul")
+    g.addEdge("fool", "cool")
+    g.addEdge("pool", "poll")
+    g.addEdge("foil", "fail")
+    g.addEdge("poll", "pole")
+    g.addEdge("poll", "pall")
+    g.addEdge("pole", "pope")
+    g.bfs(g.getVertex("fool"))
+    pass
+    
+if __name__ == '__main__':
+    test2()
