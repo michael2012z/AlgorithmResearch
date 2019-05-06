@@ -2,11 +2,11 @@ from algorithms.basic.queue import Queue
 
 class Vertex:
     
-    def __init__(self, key):
+    def __init__(self, key, color='white'):
         self.id = key
         self.connectedTo = {}
         self.distance = 0
-        self.color = ''
+        self.color = color
 
     def addNeighbor(self, nbr, weight=1):
         self.connectedTo[nbr] = weight
