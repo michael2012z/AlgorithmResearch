@@ -71,7 +71,7 @@ class Graph:
     def __iter__(self):
         return iter(self.vertList.values())
 
-    def bfs(self, start):
+    def bfs(self, start, func):
         start.setDistance(0)
         vertQueue = Queue()
         vertQueue.enqueue(start)
@@ -83,8 +83,18 @@ class Graph:
                     nbr.setDistance(currentVert.getDistance() + currentVert.getWeight(nbr))
                     vertQueue.enqueue(nbr)
             currentVert.setColor('black')
-            print(currentVert.getId())
+            func(currentVert)
 
+
+    def dfs(self, currentVert, func):
+        currentVert.setColor('gray')
+        for nbr in currentVert.getConnections():
+            if nbr.getColor() == 'white':
+                self.dfs(nbr, func)
+        currentVert.setColor('black')
+        func(currentVert)
+
+            
 def test1():
     g = Graph()
     for i in range(6):
@@ -123,8 +133,33 @@ def test2():
     g.addEdge("poll", "pole")
     g.addEdge("poll", "pall")
     g.addEdge("pole", "pope")
-    g.bfs(g.getVertex("fool"))
+    g.bfs(g.getVertex("fool"), lambda x: print(x.getId()))
     pass
-    
+
+def test3():
+    g = Graph()
+    g.addVertex("fool")
+    g.addVertex("pool")
+    g.addVertex("foil")
+    g.addVertex("foul")
+    g.addVertex("cool")
+    g.addVertex("poll")
+    g.addVertex("fail")
+    g.addVertex("pole")
+    g.addVertex("pall")
+    g.addVertex("pope")
+    g.addEdge("fool", "pool")
+    g.addEdge("fool", "foil")
+    g.addEdge("fool", "foul")
+    g.addEdge("fool", "cool")
+    g.addEdge("pool", "poll")
+    g.addEdge("foil", "fail")
+    g.addEdge("poll", "pole")
+    g.addEdge("poll", "pall")
+    g.addEdge("pole", "pope")
+    g.dfs(g.getVertex("fool"), lambda x: print(x.getId()))
+    pass
+
+
 if __name__ == '__main__':
-    test2()
+    test3()
