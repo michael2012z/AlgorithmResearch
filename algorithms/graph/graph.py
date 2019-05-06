@@ -1,4 +1,5 @@
 from algorithms.basic.queue import Queue
+from algorithms.trees.priorityQueue import PriorityQueue
 
 class Vertex:
     
@@ -58,12 +59,14 @@ class Graph:
     def __contains__(self, v):
         return v in self.vertList
 
-    def addEdge(self, f, t, cost=0):
+    def addEdge(self, f, t, weight=1, bidirect=False):
         if f not in self.vertList:
             self.addVertex(f)
         if t not in self.vertList:
             self.addVertex(t)
-        self.vertList[f].addNeighbor(self.vertList[t], cost)
+        self.vertList[f].addNeighbor(self.vertList[t], weight)
+        if bidirect == True:
+            self.vertList[t].addNeighbor(self.vertList[f], weight)
 
     def getVertices(self):
         return self.vertList.keys()
@@ -94,7 +97,59 @@ class Graph:
         currentVert.setColor('black')
         func(currentVert)
 
+    def dijkstra(self, start):
+        for v in self:
+            v.setDistance(999999999999)
+        start.setDistance(0)
+        pq = PriorityQueue()
+        pq.buildHeap([(v.getDistance(),v) for v in self])
+        while not pq.isEmpty():
+            currentVert = pq.delMin()
+            for nextVert in currentVert.getConnections():
+                newDist = currentVert.getDistance() \
+                          + currentVert.getWeight(nextVert)
+                if newDist < nextVert.getDistance():
+                    nextVert.setDistance( newDist )
+                    pq.decreaseKey(nextVert,newDist)
+        for v in self:
+            print("(%s: %d)" % (v.getId(), v.getDistance()))
+
             
+    def prim(self, start):
+        for v in self:
+            v.setDistance(999999999999)
+        start.setDistance(0)
+        g = Graph()
+        for v in self:
+            g.addVertex(v.getId())
+        pq = PriorityQueue()
+        pq.buildHeap([(v.getDistance(),v) for v in self])
+        while not pq.isEmpty():
+            currentVert = pq.delMin()
+            for nextVert in currentVert.getConnections():
+                newCost = currentVert.getWeight(nextVert)
+                if nextVert in pq and newCost<nextVert.getDistance():
+                    nextVert.setDistance(newCost)
+                    g.addEdge(currentVert.getId(), nextVert.getId(), newCost, True)
+                    pq.decreaseKey(nextVert,newCost)
+        return g
+
+    def kruskal(self, start):
+        edges = []
+        for v in self:
+            for u in v.getConnections():
+                edges.append((v.getWeight(u), (v, u)))
+        pq = PriorityQueue()
+        pq.buildHeap(edges)
+        g = Graph()
+        while not pq.isEmpty():
+            v, u = pq.delMin()
+            g.addEdge(v, u, v.getWeight(u))
+            if len(g.getVertices()) == len(self.getVertices()):
+                break
+        return g
+        
+                    
 def test1():
     g = Graph()
     for i in range(6):
@@ -160,6 +215,54 @@ def test3():
     g.dfs(g.getVertex("fool"), lambda x: print(x.getId()))
     pass
 
+def test4():
+    g = Graph()
+    g.addVertex("fool")
+    g.addVertex("pool")
+    g.addVertex("foil")
+    g.addVertex("foul")
+    g.addVertex("cool")
+    g.addVertex("poll")
+    g.addVertex("fail")
+    g.addVertex("pole")
+    g.addVertex("pall")
+    g.addVertex("pope")
+    g.addEdge("fool", "pool", 1, True)
+    g.addEdge("fool", "foil", 1, True)
+    g.addEdge("fool", "foul", 2, True)
+    g.addEdge("fool", "cool", 2, True)
+    g.addEdge("pool", "poll", 1, True)
+    g.addEdge("foil", "fail", 1, True)
+    g.addEdge("poll", "pole", 2, True)
+    g.addEdge("poll", "pall", 3, True)
+    g.addEdge("pole", "pope", 3, True)
+    g.dijkstra(g.getVertex("fool"))
+    pass
+
+def test5():
+    g = Graph()
+    g.addVertex("fool")
+    g.addVertex("pool")
+    g.addVertex("foil")
+    g.addVertex("foul")
+    g.addVertex("cool")
+    g.addVertex("poll")
+    g.addVertex("fail")
+    g.addVertex("pole")
+    g.addVertex("pall")
+    g.addVertex("pope")
+    g.addEdge("fool", "pool", 1, True)
+    g.addEdge("fool", "foil", 1, True)
+    g.addEdge("fool", "foul", 2, True)
+    g.addEdge("fool", "cool", 2, True)
+    g.addEdge("pool", "poll", 1, True)
+    g.addEdge("foil", "fail", 1, True)
+    g.addEdge("poll", "pole", 2, True)
+    g.addEdge("poll", "pall", 3, True)
+    g.addEdge("pole", "pope", 3, True)
+    g.kruskal(g.getVertex("fool"))
+    pass
+
 
 if __name__ == '__main__':
-    test3()
+    test5()

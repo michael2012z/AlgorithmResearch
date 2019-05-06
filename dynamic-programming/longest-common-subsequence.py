@@ -21,6 +21,10 @@ def lcs_bottom_up(x, y):
                 table[i][j] = (table[i-1][j][0], '-')
             else:
                 table[i][j] = (table[i][j-1][0], '|')
+    print("===========================")
+    for line in table:
+        print(line)
+    print("===========================")
     # print sequence
     r_seq = ""
     i = len(x)-1
