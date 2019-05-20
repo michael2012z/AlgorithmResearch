@@ -1,3 +1,5 @@
+from graphviz import Digraph, nohtml
+import uuid
 
 class BinaryTree:
     value      = None
@@ -56,6 +58,23 @@ class BinaryTree:
         if self.rightChild != None:
             self.rightChild.inOrder(func)
         func(self.value)
+
+    def visualize(self, filename='tmp.gv'):
+        g = Digraph('g', filename=filename, node_attr={'shape': 'record', 'height': '.1'})
+        self._visualize(g)
+        return g
+
+    def _visualize(self, g):
+        nodeName = str(uuid.uuid1())
+        g.node(nodeName, nohtml('<l> |<n> ' + str(self.value) + '|<r>'))
+        if self.leftChild != None:
+            leftUUID = self.leftChild._visualize(g)
+            g.edge(nodeName + ':l', leftUUID + ':n')
+        if self.rightChild != None:
+            rightUUID = self.rightChild._visualize(g)
+            g.edge(nodeName + ':r', rightUUID + ':n')
+        return nodeName
+
             
 if __name__ == '__main__':
     t = BinaryTree(0)
@@ -70,3 +89,6 @@ if __name__ == '__main__':
     t.preOrder(print)
     print ("----- postOrder -----")
     t.postOrder(print)
+    g = t.visualize()
+    g.view()
+    
