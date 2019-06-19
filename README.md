@@ -1,5 +1,8 @@
 # Algorithms Research and Practice
 
+## Setup
+export PYTHONPATH=$PYTHONPATH:"path/to/this/code/repo"
+
 ## Sorting
 - #### Bubble Sort - [sorting/BubbleSort.py](https://github.com/michael2012z/algorithms/blob/master/sorting/BubbleSort.py)
 - #### Insert Sort - [sorting/HeapSort.py](https://github.com/michael2012z/algorithms/blob/master/sorting/HeapSort.py)
